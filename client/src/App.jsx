@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import './App.css';
-import './components/Login/Login.css';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
