@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { FaUserShield } from 'react-icons/fa';
@@ -15,13 +15,24 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const createUser = () => {
+    const navigate = useNavigate();
+
+    //create,register new user
+    const createUser = (e) => {
+        e.preventDefault();
+
         axios.post('http://localhost:3002/register', {
             Email: email,
             Username: username,
             Password: password
         }).then(() => {
-            console.log('User created');
+            //console.log('User created');
+            setTimeout(() => {
+                setEmail('');
+                setUsername('');
+                setPassword('');
+                navigate('/');
+            }, 1000);
         });
     };
 

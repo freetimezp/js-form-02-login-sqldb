@@ -17,7 +17,7 @@ const db = mysql.createConnection({
     database: 'plant_db'
 });
 
-
+//register new user
 app.post('/register', (req, res) => {
     const sendEmail = req.body.Email;
     const sendUsername = req.body.Username;
@@ -37,7 +37,27 @@ app.post('/register', (req, res) => {
     });
 });
 
+//login user
+app.post('/login', (req, res) => {
+    const sendLoginUsername = req.body.LoginUsername;
+    const sendLoginPassword = req.body.LoginPassword;
 
+    const SQL = 'SELECT * FROM users WHERE username = ? && password = ?';
+
+    const Values = [sendLoginUsername, sendLoginPassword];
+
+    db.query(SQL, Values, (err, results) => {
+        if (err) {
+            res.send({ error: err });
+        }
+
+        if (results.length > 0) {
+            res.send(results);
+        } else {
+            res.send({ message: 'Credentials don`t match!' });
+        }
+    });
+});
 
 
 
